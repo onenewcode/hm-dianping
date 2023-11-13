@@ -1,0 +1,40 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: hmdp
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/hmdp?useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+      #初始化链接数量
+    initialSize: 5
+      #最小空闲链接数
+    minIdle: 5
+      #最大并发连接数
+    maxActive: 10
+      #获取链接等待超时的时间
+    maxWait: 60000
+      #配置间隔多久才进行一次检测,检测需要关闭的空闲链接,单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+
+  redis:
+    host: 192.168.109.128
+    port: 6379
+    lettuce:
+      pool:
+        max-active: 10
+        max-idle: 10
+        min-idle: 1
+        time-between-eviction-runs: 10s
+    password: 123456
+  jackson:
+    default-property-inclusion: non_null # JSON处理时忽略非空字段
+mybatis-plus:
+  type-aliases-package: com.hmdp.entity # 别名扫描包
+logging:
+  level:
+    com.hmdp: debug
